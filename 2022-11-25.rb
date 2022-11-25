@@ -26,7 +26,7 @@ end
 
 # More effective one-liner that stops as soon as a solution is found and doesn't need to compute all pairs up front
 def amazing_one_liner_more_efficient(list, k)
-    list.permutation(2).any? { _1 + _2 == k }
+    list.combination(2).any? { _1 + _2 == k }
 end
 
 
