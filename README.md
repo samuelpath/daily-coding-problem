@@ -14,3 +14,9 @@ But I hope to become a little better everyday.
 If you see ways in which I can improve my solutions, please provide feedback.
 
 Thanks!
+
+## How to run a solution
+
+I'm using a very basic assert method to start with, but I'm going to improve the assert library over time.
+
+To run a solution file, just enter: `ruby {file_name.rb}` in your terminal.
