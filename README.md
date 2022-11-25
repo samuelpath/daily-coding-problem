@@ -18,5 +18,6 @@ Thanks!
 ## How to run a solution
 
 I'm using a very basic assert method to start with, but I'm going to improve the assert library over time.
+For now, my `assert` simply raises an exception. So no exception raised means all assertions are successful.
 
 To run a solution file, just enter: `ruby {file_name.rb}` in your terminal.
