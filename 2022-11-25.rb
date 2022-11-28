@@ -8,27 +8,27 @@ require File.expand_path(File.dirname(__FILE__) + '/assert')
 
 # My initial naïve approach
 def any_two_numbers_add_up(list, k)
-    list.each_with_index do |current_value_to_add, index|
-        nb_of_values_to_check_with_current = list.size - index - 1
-        index_of_value_to_check_with_current = index + 1
-        nb_of_values_to_check_with_current.times do
-            if (current_value_to_add + list[index_of_value_to_check_with_current] == k)
-                return true
-            end
-            index_of_value_to_check_with_current += 1
-        end
+  list.each_with_index do |current_value_to_add, index|
+    nb_of_values_to_check_with_current = list.size - index - 1
+    index_of_value_to_check_with_current = index + 1
+    nb_of_values_to_check_with_current.times do
+      if (current_value_to_add + list[index_of_value_to_check_with_current] == k)
+        return true
+      end
+      index_of_value_to_check_with_current += 1
     end
-    false
+  end
+  false
 end
 
 # Impressive solution suggested by my colleague Andy Waite
 def amazing_one_liner(list, k)
-    list.combination(2).map(&:sum).include?(k)
+  list.combination(2).map(&:sum).include?(k)
 end
 
 # More effective one-liner that stops as soon as a solution is found and doesn't need to compute all pairs up front
 def amazing_one_liner_more_efficient(list, k)
-    list.combination(2).any? { |a| a.sum == k }
+  list.combination(2).any? { |a| a.sum == k }
 end
 
 
