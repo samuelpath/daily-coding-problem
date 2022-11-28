@@ -12,6 +12,7 @@ require File.expand_path(File.dirname(__FILE__) + '/assert')
 ######### SOLUTIONS #########
 
 # TODO: determine time and space complexity
+# Note: fails if any input value is zero!
 def initial_approach_with_division(input)
   all_numbers_product = input.reduce(:*)
   input.map { |val| all_numbers_product / val }
