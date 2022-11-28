@@ -13,20 +13,17 @@ require File.expand_path(File.dirname(__FILE__) + '/assert')
 
 # TODO: determine time and space complexity
 def initial_approach_with_division(input)
-  product_all_numbers = input.reduce(:*)
-  output = input.map { |val| product_all_numbers / val }
-  output
+  all_numbers_product = input.reduce(:*)
+  input.map { |val| all_numbers_product / val }
 end
 
 # TODO: determine time and space complexity
 def initial_approach_without_division(input)
-  output = []
-  input.each_with_index do |_, index|
+  input.each_with_index.map do |val, index|
     input_without_current = input.clone
     input_without_current.delete_at(index) # not happy about this non-immutable approach…
-    output << input_without_current.reduce(:*)
+    input_without_current.reduce(:*)
   end
-  output
 end
 
 ######### ASSERTIONS #########
