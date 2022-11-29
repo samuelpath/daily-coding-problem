@@ -22,15 +22,7 @@ require 'json'
 # assert deserialize(serialize(node)).left.left.val == 'left.left'
 
 # my Ruby implementation of the Node class given in the instructions in Python
-class Node
-  attr_reader :val, :left, :right
-
-  def initialize(val, left=nil, right=nil)
-    @val = val
-    @left = left
-    @right = right
-  end
-end
+Node = Struct.new(:val, :left, :right)
 
 ######### SOLUTIONS #########
 
