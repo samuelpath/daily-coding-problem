@@ -45,9 +45,10 @@ def serialize_or_null(root)
 end
 
 # I'm using the JSON parser to get an object, which makes the deserialization much easier (no need to parse strings)
+# Using the language's built in tools isn't considered cheating here, right?
 def deserialize(string)
-   json = JSON.parse(string)
-   Node.new(json["val"], deserialize_or_nil(json["left"]), deserialize_or_nil(json["right"]))
+  json = JSON.parse(string)
+  Node.new(json["val"], deserialize_or_nil(json["left"]), deserialize_or_nil(json["right"]))
 end
 
 def deserialize_or_nil(root)
