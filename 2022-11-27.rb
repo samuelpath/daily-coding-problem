@@ -51,3 +51,10 @@ end
 
 node = Node.new('root', Node.new('left', Node.new('left.left')), Node.new('right'))
 assert { deserialize(serialize(node)).left.left.val == 'left.left' }
+
+node = Node.new('root',
+  Node.new('left', Node.new('left.left', Node.new('left.left.left')), Node.new('left.right')),
+  Node.new(('right'), Node.new('right.left'), Node.new('right.right', nil, Node.new('right.right.right')))
+)
+assert { deserialize(serialize(node)).left.left.left.val == 'left.left.left' }
+assert { deserialize(serialize(node)).right.right.right.val == 'right.right.right' }
