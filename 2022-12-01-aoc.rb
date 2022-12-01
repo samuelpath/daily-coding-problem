@@ -82,6 +82,6 @@ end
 
 ######### ASSERTIONS #########
 
-input = File.read("./aoc-input/2022-12-01-aoc-input.rb")
+input = File.read("./aoc-input/2022-12-01-aoc-input.txt")
 assert { Day01.part1(input) == 74198 }
 assert { Day01.part2(input) == 209914 }
