@@ -76,7 +76,7 @@ class Day01
           input_grouped_by_elf.last << item.to_i
         end
       end
-      input_grouped_by_elf.map { |elf_items| elf_items.sum }
+      input_grouped_by_elf.map(&:sum)
     end
 
     # concise more "declarative" approach
