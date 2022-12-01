@@ -57,15 +57,16 @@ require 'pry'
 class Day01
   class << self
     def part1(input)
-      total_calories_by_elf(input).max
+      total_calories_by_elf_concise(input).max
     end
 
     def part2(input)
-      total_calories_by_elf(input).max(3).sum
+      total_calories_by_elf_concise(input).max(3).sum
     end
 
     private
 
+    # verbose more "imperative" approach
     def total_calories_by_elf(input)
       input_grouped_by_elf = [[]]
       input.lines.each do |item|
@@ -76,6 +77,11 @@ class Day01
         end
       end
       input_grouped_by_elf.map { |elf_items| elf_items.sum }
+    end
+
+    # concise more "declarative" approach
+    def total_calories_by_elf_concise(input)
+      input.split("\n\n").map { |group| group.split("\n").map(&:to_i).sum }
     end
   end
 end
