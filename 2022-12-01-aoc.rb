@@ -82,12 +82,12 @@ if __FILE__ == $0
 
       def test_part_1
         day01 = Day01.new(input)
-        assert_equal(day01.part1, 74198)
+        assert_equal(74198, day01.part1)
       end
 
       def test_part_2
         day01 = Day01.new(input)
-        assert_equal(day01.part2, 209914)
+        assert_equal(209914, day01.part2)
       end
 
       def input
