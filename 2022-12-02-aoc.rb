@@ -98,12 +98,12 @@ class Day02
 
     def replace_XYZ_action_by_shape_to_play(round)
       opponent_shape = MAPPING_ACTION_LETTER_TO_SHAPE[round.first]
-      self_action = MAPPING_XYZ_TO_SHAPE[round.last]
-      if (self_action == :draw)
+      self_shape = MAPPING_XYZ_TO_SHAPE[round.last]
+      if (self_shape == :draw)
         [opponent_shape, opponent_shape]
-      elsif (self_action == :win)
+      elsif (self_shape == :win)
         [opponent_shape, MAPPING_LOSER_WINNER[opponent_shape]]
-      elsif (self_action == :lose)
+      elsif (self_shape == :lose)
         [opponent_shape, MAPPING_WINNER_LOSER[opponent_shape]]
       end
     end
