@@ -20,7 +20,7 @@ class Day02
     :paper => 2,
     :scissors => 3
   }
-  MAPPING_XYZ_TO_ACTION_NAME = {
+  MAPPING_XYZ_TO_SHAPE = {
     "X" => :lose,
     "Y" => :draw,
     "Z" => :win
@@ -45,7 +45,7 @@ class Day02
         .split("\n") # [["C Z"], ["C Y"], ["B X"]…
         .map(&:split) # [["C", "Z"], ["C", "Y"], ["B", "X"]…
         .map { |round_initial_letters| naive_replace_XYZ_by_ABC(round_initial_letters) } # [["C", "C"], ["C", "B"], ["B", "A"]…
-        .map { |round_action_letters| replace_action_letters_by_action_names(round_action_letters) } # [[:scissors, :scissors], [:scissors, :paper], [:paper, :rock]…
+        .map { |round_action_letters| replace_action_letters_by_shapes(round_action_letters) } # [[:scissors, :scissors], [:scissors, :paper], [:paper, :rock]…
         .map { |round_shapes| get_score_from_round_shapes(round_shapes) } # [6, 9, 1…
         .sum
     end
@@ -63,7 +63,7 @@ class Day02
       [round_initial_letters.first, MAPPING_NAIVE_XYZ_TO_ABC[round_initial_letters.last]]
     end
 
-    def replace_action_letters_by_action_names(round_action_letters)
+    def replace_action_letters_by_shapes(round_action_letters)
       round_action_letters.map { |action_letter| MAPPING_ACTION_LETTER_TO_SHAPE[action_letter] }
     end
 
@@ -98,7 +98,7 @@ class Day02
 
     def replace_XYZ_action_by_shape_to_play(round)
       opponent_shape = MAPPING_ACTION_LETTER_TO_SHAPE[round.first]
-      self_action = MAPPING_XYZ_TO_ACTION_NAME[round.last]
+      self_action = MAPPING_XYZ_TO_SHAPE[round.last]
       if (self_action == :draw)
         [opponent_shape, opponent_shape]
       elsif (self_action == :win)
