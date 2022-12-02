@@ -75,21 +75,23 @@ if __FILE__ == $0
     require 'stringio'
     class Day01Test < Minitest::Test
       def test_total_calories_by_elf
-        input = StringIO.new("1000\n2000\n3000\n\n\n4000\n\n\n5000\n6000\n\n\n7000\n8000\n9000\n\n\n10000\n").string
-        day01 = Day01.new(input)
+        sample_input = StringIO.new("1000\n2000\n3000\n\n\n4000\n\n\n5000\n6000\n\n\n7000\n8000\n9000\n\n\n10000\n").string
+        day01 = Day01.new(sample_input)
         assert_equal([6000, 4000, 11000, 24000, 10000], day01.instance_variable_get(:@total_calories_by_elf))
       end
 
       def test_part_1
-        input = File.read("./aoc-input/#{File::basename($0, File.extname($0))}-input.txt")
         day01 = Day01.new(input)
         assert_equal(day01.part1, 74198)
       end
 
       def test_part_2
-        input = File.read("./aoc-input/#{File::basename($0, File.extname($0))}-input.txt")
         day01 = Day01.new(input)
         assert_equal(day01.part2, 209914)
+      end
+
+      def input
+        File.read("./aoc-input/#{File::basename($0, File.extname($0))}-input.txt")
       end
     end
   else
