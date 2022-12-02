@@ -1,4 +1,3 @@
-require File.expand_path(File.dirname(__FILE__) + '/assert')
 require 'pry'
 
 # Advent Of Code 2022 Day 1: https://adventofcode.com/2022/day/1
@@ -55,39 +54,48 @@ require 'pry'
 ######### SOLUTIONS #########
 
 class Day01
-  class << self
-    def part1(input)
-      total_calories_by_elf_concise(input).max
-    end
+  def initialize(input)
+    @total_calories_by_elf = input.split("\n\n").map { |group| group.split("\n").map(&:to_i).sum }
+  end
 
-    def part2(input)
-      total_calories_by_elf_concise(input).max(3).sum
-    end
+  def part1
+    @total_calories_by_elf.max
+  end
 
-    private
-
-    # verbose more "imperative" approach
-    def total_calories_by_elf(input)
-      input_grouped_by_elf = [[]]
-      input.lines.each do |item|
-        if (item.strip.empty?)
-          input_grouped_by_elf << []
-        else
-          input_grouped_by_elf.last << item.to_i
-        end
-      end
-      input_grouped_by_elf.map(&:sum)
-    end
-
-    # concise more "declarative" approach
-    def total_calories_by_elf_concise(input)
-      input.split("\n\n").map { |group| group.split("\n").map(&:to_i).sum }
-    end
+  def part2
+    @total_calories_by_elf.max(3).sum
   end
 end
 
 ######### ASSERTIONS #########
 
-input = File.read("./aoc-input/2022-12-01-aoc-input.txt")
-assert { Day01.part1(input) == 74198 }
-assert { Day01.part2(input) == 209914 }
+if __FILE__ == $0
+  if ENV['TEST']
+    require 'minitest/autorun'
+    require 'stringio'
+    class Day01Test < Minitest::Test
+      def test_total_calories_by_elf
+        input = StringIO.new("1000\n2000\n3000\n\n\n4000\n\n\n5000\n6000\n\n\n7000\n8000\n9000\n\n\n10000\n").string
+        day01 = Day01.new(input)
+        assert_equal([6000, 4000, 11000, 24000, 10000], day01.instance_variable_get(:@total_calories_by_elf))
+      end
+
+      def test_part_1
+        input = File.read("./aoc-input/#{File::basename($0, File.extname($0))}-input.txt")
+        day01 = Day01.new(input)
+        assert_equal(day01.part1, 74198)
+      end
+
+      def test_part_2
+        input = File.read("./aoc-input/#{File::basename($0, File.extname($0))}-input.txt")
+        day01 = Day01.new(input)
+        assert_equal(day01.part2, 209914)
+      end
+    end
+  else
+    input = File.read("./aoc-input/#{File::basename($0, File.extname($0))}-input.txt")
+    day01 = Day01.new(input)
+    p "Part 1: #{day01.part1}"
+    p "Part 2: #{day01.part2}"
+  end
+end
