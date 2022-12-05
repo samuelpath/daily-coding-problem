@@ -23,7 +23,7 @@ class Day03
         .split("\n")
         .each_slice(3)
         .to_a
-        .map { |group_of_three| get_intersection_three_sets(group_of_three) }
+        .map { |group_of_three| get_common_letter_three_strings(group_of_three) }
         .map { |letter| map_letter_to_priority(letter) }
         .sum
     end
@@ -32,22 +32,12 @@ class Day03
       middle_index = str.length/2
       first_half_set = get_letters_set(str.slice(0, middle_index))
       second_half_set = get_letters_set(str.slice(middle_index, middle_index))
-      get_intersection_two_sets(first_half_set, second_half_set)
+      (first_half_set & second_half_set).to_a.first
     end
 
-    def get_intersection_two_sets(set1, set2)
-      set1
-        .each do |letter|
-          return letter if set2.include?(letter)
-        end
-    end
-
-    def get_intersection_three_sets(arr)
+    def get_common_letter_three_strings(arr)
       set1, set2, set3 = arr.map { |str| get_letters_set(str) }
-      set1
-        .each do |letter|
-          return letter if set2.include?(letter) && set3.include?(letter)
-        end
+      (set1 & set2 & set3).to_a.first
     end
 
     def map_letter_to_priority(letter)
@@ -86,17 +76,6 @@ if __FILE__ == $0
         assert_equal("v", Day03.get_letter_in_both_halves("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"))
         assert_equal("t", Day03.get_letter_in_both_halves("ttgJtRGJQctTZtZT"))
         assert_equal("s", Day03.get_letter_in_both_halves("CrZsJsPPZsGzwwsLwLmpwMDw"))
-      end
-
-      def test_get_intersection_two_sets
-        set1 = Set.new("vJrwpWtwJgWr".split(""))
-        set2 = Set.new("hcsFMMfFFhFp".split(""))
-        assert_equal("p", Day03.get_intersection_two_sets(set1, set2))
-      end
-
-      def test_get_intersection_three_sets
-        assert_equal("r", Day03.get_intersection_three_sets(["vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg"]))
-        assert_equal("Z", Day03.get_intersection_three_sets(["wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw"]))
       end
 
       def test_map_letter_to_priority
