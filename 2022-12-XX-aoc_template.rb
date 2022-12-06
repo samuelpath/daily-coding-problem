@@ -22,7 +22,7 @@ if __FILE__ == $0
   if ENV['TEST']
     require 'minitest/autorun'
     require 'stringio'
-    class Day01Test < Minitest::Test
+    class DayXXTest < Minitest::Test
       
     end
   else

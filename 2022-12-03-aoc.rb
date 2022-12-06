@@ -60,7 +60,7 @@ if __FILE__ == $0
   if ENV['TEST']
     require 'minitest/autorun'
     require 'stringio'
-    class Day01Test < Minitest::Test
+    class Day03Test < Minitest::Test
       def test_part_1
         assert_equal(157, Day03.part1(input))
       end

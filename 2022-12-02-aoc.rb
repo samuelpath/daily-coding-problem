@@ -116,7 +116,7 @@ if __FILE__ == $0
   if ENV['TEST']
     require 'minitest/autorun'
     require 'stringio'
-    class Day01Test < Minitest::Test
+    class Day02Test < Minitest::Test
       def test_get_round_total_score
         # Losses
         assert_equal(1, Day02.get_round_total_score(:paper, :rock))
