@@ -9,15 +9,13 @@ class Day04
     def part1(input)
       input
         .split
-        .select { |pair| one_contains_other(pair) }
-        .count
+        .count { |pair| one_contains_other(pair) }
     end
 
     def part2(input)
       input
         .split
-        .select { |pair| ranges_overlap(pair) }
-        .count
+        .count { |pair| ranges_overlap(pair) }
     end
 
     def one_contains_other(pair)
@@ -31,7 +29,7 @@ class Day04
     end
 
     def extract_bounds_from_pair_str(pair_str)
-      pair_str.split(",").map{ |range| range.split("-") }.flatten.map(&:to_i)
+      pair_str.split(",").flat_map{ |range| range.split("-") }.map(&:to_i)
     end
   end
 end
