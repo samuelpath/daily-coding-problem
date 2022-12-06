@@ -27,7 +27,7 @@ class Day04
 
     def ranges_overlap(pair)
       a1, a2, b1, b2 = extract_bounds_from_pair_str(pair)
-      (a1 <= b1 && b1 <= a2) || (a1 <= b2 && b2 <= a2) || (b1 <= a1 && a1 <= b2) || (b1 <= a2 && a2 <= b2)
+      a1 <= b2 && a2 >= b1
     end
 
     def extract_bounds_from_pair_str(pair_str)
@@ -43,6 +43,14 @@ if __FILE__ == $0
     require 'minitest/autorun'
     require 'stringio'
     class Day04Test < Minitest::Test
+      def test_part1
+        assert_equal(2, Day04.part1(input))
+      end
+
+      def test_part2
+        assert_equal(4, Day04.part2(input))
+      end
+      
       def test_one_contains_other
         assert_equal(false, Day04.one_contains_other("2-4,6-8"))
         assert_equal(false, Day04.one_contains_other("2-3,4-5"))
@@ -68,6 +76,17 @@ if __FILE__ == $0
         assert_equal([2, 8, 3, 7], Day04.extract_bounds_from_pair_str("2-8,3-7"))
         assert_equal([6, 6, 4, 6], Day04.extract_bounds_from_pair_str("6-6,4-6"))
         assert_equal([2, 6, 4, 8], Day04.extract_bounds_from_pair_str("2-6,4-8"))
+      end
+
+      def input
+        <<EOS
+2-4,6-8
+2-3,4-5
+5-7,7-9
+2-8,3-7
+6-6,4-6
+2-6,4-8
+EOS
       end
     end
   else
