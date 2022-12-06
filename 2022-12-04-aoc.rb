@@ -1,4 +1,5 @@
 require 'pry'
+require 'active_support/all'
 
 # Advent Of Code 2022 Day 4: https://adventofcode.com/2022/day/4
 
@@ -24,16 +25,18 @@ class Day04
     end
 
     def ranges_overlap(pair)
-      a1, a2, b1, b2 = extract_bounds_from_pair_str(pair)
-      a1 <= b2 && a2 >= b1
+      a, b = extract_ranges_from_pair_str(pair)
+      a.overlaps?(b) || b.overlaps?(a)
     end
     
     def extract_ranges_from_pair_str(pair_str)
-      extract_bounds_from_pair_str(pair_str).each_slice(2).to_a.map{ |pair| (pair.first..pair.last) }
-    end
-
-    def extract_bounds_from_pair_str(pair_str)
-      pair_str.split(",").flat_map{ |range| range.split("-") }.map(&:to_i)
+      pair_str
+        .split(",")
+        .flat_map{ |range| range.split("-") }
+        .map(&:to_i)
+        .each_slice(2)
+        .to_a
+        .map{ |pair| (pair.first..pair.last) }
     end
   end
 end
@@ -71,13 +74,13 @@ if __FILE__ == $0
         assert_equal(true, Day04.ranges_overlap("2-6,4-8"))
       end
 
-      def test_extract_bounds_from_pair_str
-        assert_equal([2, 4, 6, 8], Day04.extract_bounds_from_pair_str("2-4,6-8"))
-        assert_equal([2, 3, 4, 5], Day04.extract_bounds_from_pair_str("2-3,4-5"))
-        assert_equal([5, 7, 7, 9], Day04.extract_bounds_from_pair_str("5-7,7-9"))
-        assert_equal([2, 8, 3, 7], Day04.extract_bounds_from_pair_str("2-8,3-7"))
-        assert_equal([6, 6, 4, 6], Day04.extract_bounds_from_pair_str("6-6,4-6"))
-        assert_equal([2, 6, 4, 8], Day04.extract_bounds_from_pair_str("2-6,4-8"))
+      def extract_ranges_from_pair_str
+        assert_equal([(2..4), (6..8)], Day04.extract_bounds_from_pair_str("2-4,6-8"))
+        assert_equal([(2..3), (4..5)], Day04.extract_bounds_from_pair_str("2-3,4-5"))
+        assert_equal([(5..7), (7..9)], Day04.extract_bounds_from_pair_str("5-7,7-9"))
+        assert_equal([(2..8), (3..7)], Day04.extract_bounds_from_pair_str("2-8,3-7"))
+        assert_equal([(6..6), (4..6)], Day04.extract_bounds_from_pair_str("6-6,4-6"))
+        assert_equal([(2..6), (4..8)], Day04.extract_bounds_from_pair_str("2-6,4-8"))
       end
 
       def input
