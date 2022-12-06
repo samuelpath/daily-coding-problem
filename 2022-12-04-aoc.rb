@@ -19,13 +19,17 @@ class Day04
     end
 
     def one_contains_other(pair)
-      a1, a2, b1, b2 = extract_bounds_from_pair_str(pair)
-      (a1 >= b1 && a2 <= b2) || (b1 >= a1 && b2 <= a2)
+      a, b = extract_ranges_from_pair_str(pair)
+      a.cover?(b) || b.cover?(a)
     end
 
     def ranges_overlap(pair)
       a1, a2, b1, b2 = extract_bounds_from_pair_str(pair)
       a1 <= b2 && a2 >= b1
+    end
+    
+    def extract_ranges_from_pair_str(pair_str)
+      extract_bounds_from_pair_str(pair_str).each_slice(2).to_a.map{ |pair| (pair.first..pair.last) }
     end
 
     def extract_bounds_from_pair_str(pair_str)
