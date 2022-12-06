@@ -5,8 +5,14 @@ require 'pry'
 ######### SOLUTIONS #########
 
 class DayXX
-  def initialize(input)
-    
+  class << self
+    def part1(input)
+      
+    end
+
+    def part2(input)
+      
+    end
   end
 end
 
@@ -21,8 +27,7 @@ if __FILE__ == $0
     end
   else
     input = File.read("./aoc-input/#{File::basename($0, File.extname($0))}-input.txt")
-    dayXX = DayXX.new(input)
-    p "Part 1: #{dayXX.part1}"
-    p "Part 2: #{dayXX.part2}"
+    p "Part 1: #{DayXX.part1(input)}"
+    p "Part 2: #{DayXX.part2(input)}"
   end
 end
