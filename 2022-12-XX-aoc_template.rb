@@ -1,6 +1,6 @@
 require 'pry'
 
-# Advent Of Code 2022 Day X: https://adventofcode.com/2022/day/X
+# Advent Of Code 2022 Day XX: https://adventofcode.com/2022/day/XX
 
 ######### SOLUTIONS #########
 
