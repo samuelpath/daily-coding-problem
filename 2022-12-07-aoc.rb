@@ -14,7 +14,7 @@ class Day07
     def part1(input)
       hash = parse_to_hash(input)
       generate_dir_sizes(hash)
-      @dir_sizes.select { |value| value <= 100_000 }.sum
+      @dir_sizes.select { _1 <= 100_000 }.sum
     end
 
     def part2(input)
