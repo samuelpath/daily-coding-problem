@@ -6,13 +6,9 @@ require 'pry'
 
 class Day06
   class << self
-    def part1(input)
-      find_index_end_of_slice_without_dup(input, 4)
-    end
+    def part1(input) = find_index_end_of_slice_without_dup(input, 4)
 
-    def part2(input)
-      find_index_end_of_slice_without_dup(input, 14)
-    end
+    def part2(input) = find_index_end_of_slice_without_dup(input, 14)
 
     def find_index_end_of_slice_without_dup(input, signal_size)
       chars = input.chars
