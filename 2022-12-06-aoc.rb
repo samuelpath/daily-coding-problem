@@ -12,8 +12,8 @@ class Day06
 
     def find_index_end_of_slice_without_dup(input, signal_size)
       chars = input.chars
-      chars_to_check_next = chars.slice(0, signal_size)
-      (signal_size..chars.size).each do |i|
+      chars_to_check_next = chars.first(signal_size)
+      signal_size.upto(chars.size) do |i|
         if (chars_to_check_next.size == chars_to_check_next.uniq.size)
           return i
         end
