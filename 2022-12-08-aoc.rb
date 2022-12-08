@@ -15,7 +15,6 @@ class Day08
       visible_trees_count = 0
       grid.size.times do |i|
         grid.size.times do |j|
-          is_visible = visible_from_left[i][j] || visible_from_top[i][j] || visible_from_right[i][j] || visible_from_bottom[i][j]
           if (visible_from_left[i][j] || visible_from_top[i][j] || visible_from_right[i][j] || visible_from_bottom[i][j])
             visible_trees_count += 1
           end
