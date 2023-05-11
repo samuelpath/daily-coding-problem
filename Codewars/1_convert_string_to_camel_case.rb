@@ -11,8 +11,8 @@ require 'test-unit'
 
 def to_camel_case(str)
   str
-    .gsub(/[_|-](.)/, &:upcase)
-    .gsub(/[_|-]/, '')
+    .gsub(/[_-](.)/, "&:upcase")
+    .gsub(/[_-]/, '')
 end
 
 class Tests < Test::Unit::TestCase
