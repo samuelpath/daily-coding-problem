@@ -23,5 +23,3 @@ class Tests < Test::Unit::TestCase
     assert_equal(to_camel_case("A-B-C"), "ABC", "to_camel_case('A-B-C') did not return correct value")
   end
 end
-
-
