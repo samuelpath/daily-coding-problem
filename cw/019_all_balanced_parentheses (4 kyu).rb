@@ -8,27 +8,43 @@
 
 require 'test-unit'
 require 'pry'
+require 'pry-nav'
 
 def balanced_parens(n)
-  return [""] if n == 0
+  res = [[""]]
 
-  result = []
+  (1..2*n).each do |step|
+    res[step] = []
 
-  balanced_parens(n-1).each do |item|
-    result << "()#{item}"
-    result << "(#{item})"
-    result << "#{item}()"
-    
-    if n.even?
-      result << repeat_str_n_times("#{repeat_str_n_times("(", n/2)}#{repeat_str_n_times(")", n/2)}", 2)
+    res[step-1].each do |prev_compute|
+      open_parens = prev_compute.count("(")
+      closed_parens = prev_compute.count(")")
+      
+      action = if open_parens == closed_parens
+        :open
+      else
+        if open_parens == n || step == 2*n
+          :close
+        else
+          :both
+        end
+      end
+
+      closed = prev_compute + ")"
+      opened = prev_compute + "("
+      
+      if action == :open
+        res[step] << opened
+      elsif action == :close
+        res[step] << closed
+      elsif action == :both
+        res[step] << opened
+        res[step] << closed
+      end
     end
   end
 
-  result.uniq
-end
-
-def repeat_str_n_times(char, n)
-  [char].cycle(n).to_a.join
+  res.last
 end
 
 class Tests < Test::Unit::TestCase
@@ -45,9 +61,3 @@ class Tests < Test::Unit::TestCase
     }
   end
 end
-
-# ["(((())))", "((()()))", "((())())", "((()))()", "(()(()))", "(()()())", "(()())()", "(())(())", "(())()()", "()((()))", "()(()())", "()(())()", "()()(())", "()()()()"]
-# ["(((())))", "((()()))", "((())())", "((()))()", "(()(()))", "(()()())", "(()())()", "(())()()", "()((()))", "()(()())", "()(())()", "()()(())", "()()()()"]
-
-# "(())(())"
-# "((()))((()))"
