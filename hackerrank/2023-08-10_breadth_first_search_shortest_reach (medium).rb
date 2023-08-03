@@ -12,6 +12,7 @@
 require 'test-unit'
 
 EDGE_DISTANCE = 6
+DISCONNECTED_NODE = -1
 
 def bfs(n, m, edges, s)
   graph = build_graph(n, edges)
@@ -19,7 +20,7 @@ def bfs(n, m, edges, s)
 
   results = []
   1.upto(n).select { |node| node != s }.each do |node|
-    results << shortest_distance_from_start.fetch(node, -1)
+    results << shortest_distance_from_start.fetch(node, DISCONNECTED_NODE)
   end
   results
 end
